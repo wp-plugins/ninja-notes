@@ -1,7 +1,7 @@
 <?
 /*
 Plugin Name: Ninja Notes
-version: 0.1.3
+version: 0.1.4
 Plugin URI: http://www.code-ninja.co.uk/
 Description: NOTES App for keeping track of various things
 Author: Code Ninja
@@ -112,7 +112,7 @@ echo("<option value='".$row->id."'>".$row->name."</option>");
 
 //Menu
 function ninjanotes_menu() {
-	add_menu_page( 'Notes', 'Notes', 'manage_options', 'ninjanotes-notepage', 'ninjanotes_notepage_callback', plugins_url('NinjaNotes/images/icon.png') ,40 );
+	add_menu_page( 'Notes', 'Notes', 'manage_options', 'ninjanotes-notepage', 'ninjanotes_notepage_callback', plugins_url('ninja-notes/images/icon.png') ,40 );
 	add_submenu_page( 'ninjanotes-notepage', 'Information', 'Information', 'manage_options', 'ninjanotes-infopage', 'ninjanotes_infopage_callback' );
 }
 
