@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
                 type: "POST",
                 data: "&id=" + selected,
-                url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+                url: "<? echo plugins_url('ninja-notes/notes.php');?>",
                 success: function(msg){
                         document.getElementById("nnnotes").value = msg;
                 }
@@ -126,7 +126,7 @@ jQuery(document).ready(function() {
 	        jQuery.ajax({
 	        	type: "POST",
         		data: "&id=" + selected,
-			url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+			url: "<? echo plugins_url('ninja-notes/notes.php');?>",
             		success: function(msg){
                     			document.getElementById("nnnotes").value = msg;
 			}			
@@ -136,7 +136,7 @@ jQuery(document).ready(function() {
 	jQuery.ajax({
 		type: "POST",
 		data: "&id=" + selected,
-		url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+		url: "<? echo plugins_url('ninja-notes/notes.php');?>",
 		success: function(msg){
 			document.getElementById("nnnotes").value = msg;
 		}
@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
 <div class="wrap">
 <h2>Ninja Notes by <a href="http://code-ninja.co.uk">CodeNinja</a></h2>
 <hr/>
-<form method="post" action="<? echo plugins_url('NinjaNotes/notes.php');?>">
+<form method="post" action="<? echo plugins_url('ninja-notes/notes.php');?>">
 <select name="nnselect" id="nnselect">
 <?php
 $res = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ninjanotes order by `name`");
