@@ -1,7 +1,7 @@
 <?
 /*
 Plugin Name: Ninja Notes
-version: 0.1.2
+version: 1.1
 Plugin URI: http://www.code-ninja.co.uk/
 Description: NOTES App for keeping track of various things
 Author: Code Ninja
@@ -38,7 +38,76 @@ function nn_install_data() {
 //Tags & hooks
 register_activation_hook(__FILE__,'nn_install');
 register_activation_hook(__FILE__,'nn_install_data');
+add_action( 'admin_menu', 'nn_add_post_box' );
 add_action('admin_menu', 'ninjanotes_menu');
+add_action("save_post", "nn_save_details");
+
+
+//This function adds the  meta baox to the Write Post Screen
+function nn_add_post_box() {
+	add_meta_box('nn_options','Ninja Notes','nn_post_box_content','post','normal','high' );
+	add_meta_box('nn_options','Ninja Notes','nn_post_box_content','page','normal','high' );
+}
+
+//Save Notes
+function nn_save_details($post_id){
+global $wpdb;
+  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return $post_id;
+  if ( 'page' == $_POST['post_type'] )
+  {
+    if ( !current_user_can( 'edit_page', $post_id ) )
+        return $post_id;
+  }
+  else
+  {
+    if ( !current_user_can( 'edit_post', $post_id ) )
+        return $post_id;
+  };
+  $wpdb->update($wpdb->prefix."ninjanotes", array('notes' => $_POST['nnnotes']), array('id' => $_POST['nnselect']),array('%s'));
+
+}
+
+//metaBox for posts/pages
+function nn_post_box_content() {
+global $wpdb;
+?>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+        jQuery("#nnselect").change(function() {
+                var selected = jQuery("#nnselect").val();
+                jQuery.ajax({
+                        type: "POST",
+                        data: "&id=" + selected,
+                        url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+                        success: function(msg){
+                                        document.getElementById("nnnotes").value = msg;
+                        }
+                });
+        });
+        var selected = jQuery("#nnselect").val();
+        jQuery.ajax({
+                type: "POST",
+                data: "&id=" + selected,
+                url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+                success: function(msg){
+                        document.getElementById("nnnotes").value = msg;
+                }
+        });
+});
+</script>
+<select name="nnselect" id="nnselect">
+<?php
+$res = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ninjanotes order by `name`");
+foreach($res as $row){
+echo("<option value='".$row->id."'>".$row->name."</option>");
+}
+?>
+</select><br/>
+<div id="wp-content-editor-container" class="wp-editor-container">
+<textarea rows="15" cols="100"  name="nnnotes" id="nnnotes" class="wp-editor-area">
+</textarea></div>
+<?php
+}
 
 
 //Menu
@@ -57,7 +126,7 @@ jQuery(document).ready(function() {
 	        jQuery.ajax({
 	        	type: "POST",
         		data: "&id=" + selected,
-			url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+			url: "<? echo plugins_url('ninja-notes/notes.php');?>",
             		success: function(msg){
                     			document.getElementById("nnnotes").value = msg;
 			}			
@@ -67,7 +136,7 @@ jQuery(document).ready(function() {
 	jQuery.ajax({
 		type: "POST",
 		data: "&id=" + selected,
-		url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+		url: "<? echo plugins_url('ninja-notes/notes.php');?>",
 		success: function(msg){
 			document.getElementById("nnnotes").value = msg;
 		}
@@ -78,7 +147,7 @@ jQuery(document).ready(function() {
 <div class="wrap">
 <h2>Ninja Notes by <a href="http://code-ninja.co.uk">CodeNinja</a></h2>
 <hr/>
-<form method="post" action="<? echo plugins_url('NinjaNotes/notes.php');?>">
+<form method="post" action="<? echo plugins_url('ninja-notes/notes.php');?>">
 <select name="nnselect" id="nnselect">
 <?php
 $res = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ninjanotes order by `name`");
