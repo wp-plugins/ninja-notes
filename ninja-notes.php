@@ -1,7 +1,7 @@
 <?
 /*
 Plugin Name: Ninja Notes
-version: 1.0
+version: 1.1
 Plugin URI: http://www.code-ninja.co.uk/
 Description: NOTES App for keeping track of various things
 Author: Code Ninja
@@ -78,7 +78,7 @@ jQuery(document).ready(function() {
                 jQuery.ajax({
                         type: "POST",
                         data: "&id=" + selected,
-                        url: "<? echo plugins_url('NinjaNotes/notes.php');?>",
+                        url: "<? echo plugins_url('ninja-notes/notes.php');?>",
                         success: function(msg){
                                         document.getElementById("nnnotes").value = msg;
                         }
