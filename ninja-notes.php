@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Plugin Name: Ninja Notes
 version: 1.1
@@ -78,7 +78,7 @@ jQuery(document).ready(function() {
                 jQuery.ajax({
                         type: "POST",
                         data: "&id=" + selected,
-                        url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+                        url: "<?php echo plugins_url('ninja-notes/notes.php');?>",
                         success: function(msg){
                                         document.getElementById("nnnotes").value = msg;
                         }
@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
                 type: "POST",
                 data: "&id=" + selected,
-                url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+                url: "<?php echo plugins_url('ninja-notes/notes.php');?>",
                 success: function(msg){
                         document.getElementById("nnnotes").value = msg;
                 }
@@ -126,7 +126,7 @@ jQuery(document).ready(function() {
 	        jQuery.ajax({
 	        	type: "POST",
         		data: "&id=" + selected,
-			url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+			url: "<?php echo plugins_url('ninja-notes/notes.php');?>",
             		success: function(msg){
                     			document.getElementById("nnnotes").value = msg;
 			}			
@@ -136,7 +136,7 @@ jQuery(document).ready(function() {
 	jQuery.ajax({
 		type: "POST",
 		data: "&id=" + selected,
-		url: "<? echo plugins_url('ninja-notes/notes.php');?>",
+		url: "<?php echo plugins_url('ninja-notes/notes.php');?>",
 		success: function(msg){
 			document.getElementById("nnnotes").value = msg;
 		}
@@ -147,7 +147,7 @@ jQuery(document).ready(function() {
 <div class="wrap">
 <h2>Ninja Notes by <a href="http://code-ninja.co.uk">CodeNinja</a></h2>
 <hr/>
-<form method="post" action="<? echo plugins_url('ninja-notes/notes.php');?>">
+<form method="post" action="<?php echo plugins_url('ninja-notes/notes.php');?>">
 <select name="nnselect" id="nnselect">
 <?php
 $res = $wpdb->get_results("SELECT * FROM ".$wpdb->prefix."ninjanotes order by `name`");
@@ -168,7 +168,7 @@ If there are no notes listed in the dropdown then create a new one.
 </p>
 </form>
 </div>
-<?
+<?php
 }
 
 function ninjanotes_infopage_callback() {
@@ -193,7 +193,7 @@ If you find this Plugin as useful as I do, Please consider a small donation to k
 </form>
 </p>
 </div>
-<?
+<?php
 }
 
 ?>
