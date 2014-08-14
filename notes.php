@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($_SERVER['DOCUMENT_ROOT'].'/wp-load.php' );
 global $wpdb;
 if($_POST['submit']=="Save"){

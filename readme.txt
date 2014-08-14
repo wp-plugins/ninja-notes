@@ -2,8 +2,8 @@
 Contributors: Code-Ninja 
 Tags: notes, memo, notepad
 Requires at least: 
-Tested up to: 3.9.1
-Stable tag: 1.1.1
+Tested up to: 3.9.2
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -20,6 +20,8 @@ It lets you have as many sperate notepads as you want. It's a great way to keep 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
 == Changelog ==
+1.1.2 Fixed Glitch for PHP V 5.5
+
 1.1.1 Tested & Tweaked for Latest version of Wordpress
 
 1.1 Fixed typo on Plugin Name path.
