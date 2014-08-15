@@ -1,9 +1,18 @@
-<?
-include_once($_SERVER['DOCUMENT_ROOT'].'/wp-load.php' );
+<?php
+/*
+Plugin Name: Ninja Notes
+version: 1.2
+Plugin URI: http://www.code-ninja.co.uk/
+Description: NOTES App for keeping track of various things
+Author: Code Ninja
+Author URI: http://www.code-ninja.co.uk/
+*/
+$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
+require_once( $parse_uri[0] . 'wp-load.php' );
 global $wpdb;
 if($_POST['submit']=="Save"){
 	$wpdb->update($wpdb->prefix."ninjanotes", array('notes' => $_POST['nnnotes']), array('id' => $_POST['nnselect']),array('%s'));
-	header("Location: ". $_SERVER["HTTP_REFERER"]);
+	header("Location: ". $_SERVER["HTTP_REFERER"]."&id=".$_POST['nnselect']);
 }elseif($_POST['submit']=="Delete"){
 	$wpdb->query("delete from ".$wpdb->prefix."ninjanotes where `id`='".$_POST['nnselect']."'");
 	header("Location: ". $_SERVER["HTTP_REFERER"]);
@@ -14,6 +23,6 @@ if($_POST['submit']=="Save"){
 	header("Location: ". $_SERVER["HTTP_REFERER"]);
 }else{
 	$res = $wpdb->get_var("SELECT `notes` FROM ".$wpdb->prefix."ninjanotes where `id`='".$_POST['id']."'");
-	echo($res);
+	echo(stripslashes($res));
 }
 ?>
