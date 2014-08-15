@@ -1,5 +1,6 @@
-<?
-include_once($_SERVER['DOCUMENT_ROOT'].'/wp-load.php' );
+<?php
+$parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
+require_once( $parse_uri[0] . 'wp-load.php' );
 global $wpdb;
 if($_POST['submit']=="Save"){
 	$wpdb->update($wpdb->prefix."ninjanotes", array('notes' => $_POST['nnnotes']), array('id' => $_POST['nnselect']),array('%s'));
