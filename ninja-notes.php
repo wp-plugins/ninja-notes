@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Ninja Notes
-version: 1.1
+version: 1.1.3
 Plugin URI: http://www.code-ninja.co.uk/
 Description: NOTES App for keeping track of various things
 Author: Code Ninja
