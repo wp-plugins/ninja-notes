@@ -2,8 +2,8 @@
 Contributors: Code-Ninja 
 Tags: notes, memo, notepad
 Requires at least: 
-Tested up to: 3.9.2
-Stable tag: 1.2
+Tested up to: 4.1
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -20,6 +20,8 @@ It lets you have as many separate notepads as you want. It's a great way to keep
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
 
 == Changelog ==
+1.2.1 Fixed bug since Wordpress update where plugin is listed twice
+
 1.2 Version Update to add features requested by kdunham on wordpress. Notes now remember which note you were on when you hit save, or update a post/page. Plus bugfix for erroneous slash issue.
 
 1.1.3 Fixed bug where notes would sometimes fail to update

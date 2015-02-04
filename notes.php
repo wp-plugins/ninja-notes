@@ -1,12 +1,4 @@
 <?php
-/*
-Plugin Name: Ninja Notes
-version: 1.2
-Plugin URI: http://www.code-ninja.co.uk/
-Description: NOTES App for keeping track of various things
-Author: Code Ninja
-Author URI: http://www.code-ninja.co.uk/
-*/
 $parse_uri = explode( 'wp-content', $_SERVER['SCRIPT_FILENAME'] );
 require_once( $parse_uri[0] . 'wp-load.php' );
 global $wpdb;
