@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Ninja Notes
-version: 1.2.1
+version: 1.3
 Plugin URI: http://www.code-ninja.co.uk/
 Description: NOTES App for keeping track of various things
 Author: Code Ninja
@@ -30,9 +30,14 @@ function nn_install() {
 
 function nn_install_data() {
 	global $wpdb;
-	$nn_name="Welcome";
-	$nn_note="Thank you for using Ninja Notes.\nWhen A Ninja handles your Notes, you know they are safe.\n\nCode-Ninja";
-	$addNote = $wpdb->insert( $wpdb->prefix."ninjanotes",array('name' => $nn_name, 'notes' => $nn_note));
+  global $nn_db_version;
+  $nn_db_old_version = get_option("nn_db_version");
+  if($nn_db_old_version != $nn_db_version){
+	  $nn_name="Welcome";
+	  $nn_note="Thank you for using Ninja Notes.\nWhen A Ninja handles your Notes, you know they are safe.\n\nCode-Ninja";
+	  $addNote = $wpdb->insert( $wpdb->prefix."ninjanotes",array('name' => $nn_name, 'notes' => $nn_note));
+    update_option("nn_db_version", $nn_db_version);
+  }
 }
 
 //Tags & hooks
@@ -93,6 +98,18 @@ jQuery(document).ready(function() {
                         document.getElementById("nnnotes").value = msg;
                 }
         });
+        jQuery("#addnote").click(function() {
+                jQuery.ajax({
+                        type: "POST",
+                        data: "&nnname=POST:<?php echo get_the_ID();?>&submit=New",
+                        url: "<?php echo plugins_url('ninja-notes/notes.php');?>",
+                        success: function(msg){
+                                        document.getElementById("nnnotes").value = "";
+                                        jQuery('#nnselect').append("<option value='" + msg + "'>POST:<?php echo get_the_ID();?></option>");
+                                         jQuery('#nnselect').find('option[value="' + msg + '"]').attr("selected",true);
+                        }
+                });
+        });
 });
 </script>
 <select name="nnselect" id="nnselect">
@@ -105,7 +122,7 @@ foreach($res as $row){
   echo(">".$row->name."</option>");
 }
 ?>
-</select><br/>
+</select><input type="button" id="addnote" name="addnote" value="Add New"><br/>
 <div id="wp-content-editor-container" class="wp-editor-container">
 <textarea rows="15" cols="100"  name="nnnotes" id="nnnotes" class="wp-editor-area">
 </textarea></div>
@@ -169,7 +186,7 @@ If there are no notes listed in the dropdown then create a new one.
 <input type="hidden" name="action" value="update" />
 <p>
 <input type="submit" value="Save" name="submit"/><input type="submit" value="Delete" name="submit"/>
-<input type="text" name="nnname"><input type="submit" value="New" name="submit"/>
+<input type="text" name="nnname"><input type="submit" value="New Note" name="submit"/>
 </p>
 </form>
 </div>

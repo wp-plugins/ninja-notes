@@ -11,8 +11,13 @@ if($_POST['submit']=="Save"){
 }elseif($_POST['submit']=="New"){
 	if($_POST['nnname']!=''){
 		$wpdb->insert( $wpdb->prefix."ninjanotes",array('name' => $_POST['nnname']),array('%s'));
+    echo($wpdb->insert_id);
 	}
-	header("Location: ". $_SERVER["HTTP_REFERER"]);
+}elseif($_POST['submit']=="New Note"){
+  if($_POST['nnname']!=''){
+    $wpdb->insert( $wpdb->prefix."ninjanotes",array('name' => $_POST['nnname']),array('%s'));
+  }
+  header("Location: ". $_SERVER["HTTP_REFERER"]);
 }else{
 	$res = $wpdb->get_var("SELECT `notes` FROM ".$wpdb->prefix."ninjanotes where `id`='".$_POST['id']."'");
 	echo(stripslashes($res));
